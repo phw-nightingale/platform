@@ -21,6 +21,9 @@
     <result column="str4" property="str4" jdbcType="VARCHAR" />
     <result column="str5" property="str5" jdbcType="VARCHAR" />
   </resultMap>
+  <sql id="Base_Table_Name">
+    sys_category
+  </sql>
   <sql id="Base_Column_List" >
     id, name, create_time, create_user, create_user_id, update_time, update_user, update_user_id, 
     delete_time, delete_user, delete_user_id, is_enable, remark, str1, str2, str3, str4, 
@@ -243,4 +246,152 @@
       str5 = #{str5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- Custom Basic SQL Statement -->
+  <select id="load" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    where
+    ${unique} = #{value}
+  </select>
+  <delete id="deleteByConditions" parameterType="java.util.Map">
+    delete from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} = #{value}
+      </foreach>
+    </where>
+  </delete>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+  </select>
+
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    order by ${orderBy}
+  </select>
+
+  <select id="selectAllOrderAndSort" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    order by ${orderBy} ${sort}
+  </select>
+
+  <update id="updateByConditions" parameterType="java.util.Map">
+    update
+    <include refid="Base_Column_List"/>
+    <set>
+      <foreach collection="entry" index="key" item="value" separator=",">
+        ${key} = #{value}
+      </foreach>
+    </set>
+    <where>
+      <foreach collection="conditions" index="key" item="value" separator="and">
+        ${key} = #{value}
+      </foreach>
+    </where>
+  </update>
+
+  <select id="selectByConditions" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} = #{value}
+      </foreach>
+    </where>
+  </select>
+
+  <select id="selectByConditionsOrder" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} = #{value}
+      </foreach>
+    </where>
+    order by ${orderBy}
+  </select>
+
+  <select id="selectByConditionsOrderAndSort" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} = #{value}
+      </foreach>
+    </where>
+    order by ${orderBy} ${sort}
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from
+    <include refid="Base_Table_Name"/>
+  </select>
+
+  <select id="selectCountByConditions" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} = #{value}
+      </foreach>
+    </where>
+  </select>
+
+  <select id="selectLike" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} like "%"#{value}"%"
+      </foreach>
+    </where>
+  </select>
+
+  <select id="selectLikeOrder" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} like "%"#{value}"%"
+      </foreach>
+    </where>
+    order by ${orderBy}
+  </select>
+
+  <select id="selectLikeOrderAndSort" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Base_Table_Name"/>
+    <where>
+      <foreach collection="map" index="key" item="value" separator="and">
+        ${key} like "%"#{value}"%"
+      </foreach>
+    </where>
+    order by ${orderBy} ${sort}
+  </select>
 </mapper>

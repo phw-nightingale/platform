@@ -48,11 +48,6 @@ public class UserController extends BaseController<User> {
         return userService.signUp(user);
     }
 
-    @PostMapping("/api/wx-sign-in")
-    public JsonResult wxSignIn(@RequestParam String jsCode) {
-        return userService.wxLogin(jsCode);
-    }
-
     @PutMapping("/api/users/{id}")
     public JsonResult updateUser(@PathVariable Integer id, User user) {
         user.setId(id);

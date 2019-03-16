@@ -2,6 +2,7 @@ package cn.giit.platform.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+@Slf4j
 public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
 
     public abstract BaseMapper<T> getMapper();
@@ -239,6 +241,22 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
             return null;
         }
         return getMapper().selectByPrimaryKey(id);
+    }
+
+    @Override
+    public T selectItem(String key, String val) {
+        if (BaseUtils.isNullOrEmpty(key, val)) {
+            return null;
+        }
+        List<T> items = selectItems(key, val);
+        if (BaseUtils.isNullOrEmpty(items)) {
+            return null;
+        }
+        if (items.size() > 1) {
+            log.warn("item's size has more than 1...");
+            return null;
+        }
+        return items.get(0);
     }
 
     @Override

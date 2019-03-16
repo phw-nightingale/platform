@@ -25,11 +25,12 @@ public class RegisterInterceptor implements WebMvcConfigurer {
         registry.addInterceptor(userInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(
-                        "/api/**", // 为了方便测试某些Api，可以暂时写到这下面
-                        "/authorize",
-                        "/sign-in",
-                        "/sign-out",
-                        "/sign-up",
+                        //"/api/**", // 为了方便测试某些Api，可以暂时写到这下面
+                        "/api/authorize",
+                        "/api/wx-sign-in",
+                        "/api/sign-in",
+                        "/api/sign-out",
+                        "/api/sign-up",
                         "/401",
                         "/403",
                         "/404",

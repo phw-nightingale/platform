@@ -104,6 +104,15 @@ public interface BaseService<T extends BaseEntity> {
     T selectByPrimaryKey(Integer id);
 
     /**
+     * 根据条件选择单个结果
+     *
+     * @param key 关键字
+     * @param val 值
+     * @return 结果
+     */
+    T selectItem(String key, String val);
+
+    /**
      * 查询所有记录
      *
      * @return 对相集合

@@ -29,30 +29,18 @@ public class UserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        String token = request.getHeader(AppConst.KEY_AUTHORIZATION);
+        String token = request.getHeader(AppConst.KEY_SESSION_KEY);
         if (BaseUtils.isNullOrEmpty(token)) {
             response.sendRedirect("/401");
             return false;
         }
-        try {
-            // 判断token是否过期
-            JsonResult res = userService.selectUserByToken(token);
-            if (res.getCode() != AppConst.RESULT_SUCCESS) {
-                response.sendRedirect("/403");
-            }
-            User user = (User) res.getData();
-            long expires = Long.valueOf(user.getStr1());
-            if (new Date().getTime() > expires) {
-                response.sendRedirect("/401");
-                return false;
-            }
-
-
-        } catch (Exception e) {
-            log.error(e.getMessage());
+        // 判断token是否合法
+        User user = userService.selectItem(AppConst.KEY_WXTOKEN, token);
+        if (BaseUtils.isNullOrEmpty(user)) {
             response.sendRedirect("/401");
             return false;
         }
+        request.setAttribute(AppConst.KEY_CURRENT_USER, user);
 
         return true;
     }

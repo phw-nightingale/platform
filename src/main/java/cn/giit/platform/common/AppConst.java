@@ -10,6 +10,7 @@ public class AppConst {
     public static final int RESULT_ERROR = 500;
     public static final int RESULT_SUCCESS = 200;
     public static final int RESULT_WARN = 201;
+    public static final int RESULT_LOGOUT = 202;
 
     public static final String KEY_DATA = "data";
     public static final String KEY_AUTHORIZATION = "Authorization";
@@ -39,9 +40,9 @@ public class AppConst {
     public static final String KEY_CURRENT_REQUEST = "current-request";
     public static final String KEY_PAGE = "page";
 
-    public static final String APPID  = "wxbb4f0b22f4b54783";
-    public static final String APPSEC = "8e743cb5eacd05a6670f2d58d2c9b3b0";
-
     public static final String KEY_SERVER = "https://four-road-titans.xyz:8080";
     public static final String KEY_QR_PATH = "/home/phw/Download";
+    public static final String KEY_WXTOKEN = "wx_token";
+    public static final String KEY_PHONE = "phone";
+    public static final String KEY_SESSION_KEY = "session_key";
 }
