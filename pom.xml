@@ -104,6 +104,7 @@
                 <!-- MVN打包时跳过测试 -->
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <!-- mybatis generator 自动生成代码插件 -->
