@@ -53,4 +53,9 @@ public class CourseController extends BaseController<Course> {
     public JsonResult findCourses(@PathVariable String key, @PathVariable String val, Page page) {
         return findItems(key, val, page);
     }
+
+    @GetMapping("/api/courses")
+    public JsonResult findCourses(Course course, Page page) {
+        return findItems(course, page);
+    }
 }
