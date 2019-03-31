@@ -287,7 +287,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         if (BaseUtils.isNullOrEmpty(conditionMap)) {
             conditionMap = new HashMap<>();
         }
-        if (!(pageNum == 0 || pageSize == 0)) {
+        if (pageNum != 0 && pageSize != 0) {
             PageHelper.startPage(pageNum, pageSize);
         }
         if (!BaseUtils.isNullOrEmpty(orderBy)) {
