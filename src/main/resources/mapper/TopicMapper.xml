@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="cn.giit.platform.entity.Topic" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="header" property="header" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="is_hot" property="isHot" jdbcType="INTEGER" />
@@ -24,13 +26,10 @@
     <result column="str4" property="str4" jdbcType="VARCHAR" />
     <result column="str5" property="str5" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Table_Name">
-    sys_topic
-  </sql>
   <sql id="Base_Column_List" >
-    id, header, title, content, is_hot, create_time, create_user, create_user_id, update_time, 
-    update_user, update_user_id, delete_time, delete_user, delete_user_id, is_enable, 
-    remark, str1, str2, str3, str4, str5
+    id, header, category, category_id, title, content, is_hot, create_time, create_user, 
+    create_user_id, update_time, update_user, update_user_id, delete_time, delete_user, 
+    delete_user_id, is_enable, remark, str1, str2, str3, str4, str5
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -43,20 +42,22 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.giit.platform.entity.Topic" >
-    insert into sys_topic (id, header, title, 
-      content, is_hot, create_time, 
-      create_user, create_user_id, update_time, 
-      update_user, update_user_id, delete_time, 
-      delete_user, delete_user_id, is_enable, 
-      remark, str1, str2, 
-      str3, str4, str5)
-    values (#{id,jdbcType=INTEGER}, #{header,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{isHot,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=VARCHAR}, #{updateUserId,jdbcType=INTEGER}, #{deleteTime,jdbcType=TIMESTAMP}, 
-      #{deleteUser,jdbcType=VARCHAR}, #{deleteUserId,jdbcType=INTEGER}, #{isEnable,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{str1,jdbcType=VARCHAR}, #{str2,jdbcType=VARCHAR}, 
-      #{str3,jdbcType=VARCHAR}, #{str4,jdbcType=VARCHAR}, #{str5,jdbcType=VARCHAR})
+    insert into sys_topic (id, header, category, 
+      category_id, title, content, 
+      is_hot, create_time, create_user, 
+      create_user_id, update_time, update_user, 
+      update_user_id, delete_time, delete_user, 
+      delete_user_id, is_enable, remark, 
+      str1, str2, str3, str4, 
+      str5)
+    values (#{id,jdbcType=INTEGER}, #{header,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{isHot,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=INTEGER}, #{deleteTime,jdbcType=TIMESTAMP}, #{deleteUser,jdbcType=VARCHAR}, 
+      #{deleteUserId,jdbcType=INTEGER}, #{isEnable,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{str1,jdbcType=VARCHAR}, #{str2,jdbcType=VARCHAR}, #{str3,jdbcType=VARCHAR}, #{str4,jdbcType=VARCHAR}, 
+      #{str5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.giit.platform.entity.Topic" >
     insert into sys_topic
@@ -66,6 +67,12 @@
       </if>
       <if test="header != null" >
         header,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
       </if>
       <if test="title != null" >
         title,
@@ -132,6 +139,12 @@
       <if test="header != null" >
         #{header,jdbcType=VARCHAR},
       </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
@@ -197,6 +210,12 @@
       <if test="header != null" >
         header = #{header,jdbcType=VARCHAR},
       </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -260,6 +279,8 @@
   <update id="updateByPrimaryKey" parameterType="cn.giit.platform.entity.Topic" >
     update sys_topic
     set header = #{header,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       is_hot = #{isHot,jdbcType=INTEGER},
@@ -281,7 +302,6 @@
       str5 = #{str5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <!-- Custom Basic SQL Statement -->
   <select id="load" parameterType="java.util.Map" resultMap="BaseResultMap">
     select

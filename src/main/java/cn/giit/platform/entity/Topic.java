@@ -4,6 +4,10 @@ public class Topic extends BaseEntity {
 
     private String header;
 
+    private String category;
+
+    private Integer categoryId;
+
     private String title;
 
     private String content;
@@ -16,6 +20,22 @@ public class Topic extends BaseEntity {
 
     public void setHeader(String header) {
         this.header = header == null ? null : header.trim();
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {
@@ -41,5 +61,4 @@ public class Topic extends BaseEntity {
     public void setIsHot(Integer isHot) {
         this.isHot = isHot;
     }
-
 }
