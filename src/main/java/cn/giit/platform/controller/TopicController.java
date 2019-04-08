@@ -48,4 +48,9 @@ public class TopicController extends BaseController<Topic> {
     public JsonResult findTopics(Topic topic, Page page) {
         return findItems(topic, page);
     }
+
+    @GetMapping("/api/topics/{id}")
+    public JsonResult findTopicById(@PathVariable Integer id) {
+        return findItemByPrimaryKey(id);
+    }
 }

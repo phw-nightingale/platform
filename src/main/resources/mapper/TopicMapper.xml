@@ -26,6 +26,9 @@
     <result column="str4" property="str4" jdbcType="VARCHAR" />
     <result column="str5" property="str5" jdbcType="VARCHAR" />
   </resultMap>
+  <sql id="Base_Table_Name">
+    sys_topic
+  </sql>
   <sql id="Base_Column_List" >
     id, header, category, category_id, title, content, is_hot, create_time, create_user, 
     create_user_id, update_time, update_user, update_user_id, delete_time, delete_user, 
