@@ -40,7 +40,7 @@
     delete from sys_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.giit.platform.entity.Category" >
+  <insert id="insert" parameterType="cn.giit.platform.entity.Category" useGeneratedKeys="true" keyProperty="id">
     insert into sys_category (id, name, create_time, 
       create_user, create_user_id, update_time, 
       update_user, update_user_id, delete_time, 
@@ -56,7 +56,7 @@
       #{str3,jdbcType=VARCHAR}, #{str4,jdbcType=VARCHAR}, #{str5,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.giit.platform.entity.Category" >
+  <insert id="insertSelective" parameterType="cn.giit.platform.entity.Category" useGeneratedKeys="true" keyProperty="id">
     insert into sys_category
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

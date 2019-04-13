@@ -49,7 +49,7 @@
     delete from sys_advertise
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.giit.platform.entity.Advertise" >
+  <insert id="insert" parameterType="cn.giit.platform.entity.Advertise" useGeneratedKeys="true" keyProperty="id">
     insert into sys_advertise (id, company, company_id, 
       title, city, lowest_pay, 
       most_pay, description, phone, 
@@ -69,7 +69,7 @@
       #{remark,jdbcType=VARCHAR}, #{str1,jdbcType=VARCHAR}, #{str2,jdbcType=VARCHAR}, 
       #{str3,jdbcType=VARCHAR}, #{str4,jdbcType=VARCHAR}, #{str5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.giit.platform.entity.Advertise" >
+  <insert id="insertSelective" parameterType="cn.giit.platform.entity.Advertise" useGeneratedKeys="true" keyProperty="id">
     insert into sys_advertise
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

@@ -45,7 +45,7 @@
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.giit.platform.entity.User" >
+  <insert id="insert" parameterType="cn.giit.platform.entity.User" keyProperty="id">
     insert into sys_user (id, username, nickname, 
       password, true_name, phone, 
       token, wx_token, create_time, 
@@ -63,7 +63,7 @@
       #{remark,jdbcType=VARCHAR}, #{str1,jdbcType=VARCHAR}, #{str2,jdbcType=VARCHAR}, 
       #{str3,jdbcType=VARCHAR}, #{str4,jdbcType=VARCHAR}, #{str5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.giit.platform.entity.User" >
+  <insert id="insertSelective" parameterType="cn.giit.platform.entity.User" keyProperty="id">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

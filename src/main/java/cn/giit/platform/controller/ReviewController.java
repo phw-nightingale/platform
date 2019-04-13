@@ -6,7 +6,6 @@ import cn.giit.platform.entity.Review;
 import cn.giit.platform.service.BaseService;
 import cn.giit.platform.service.ReviewService;
 import cn.giit.platform.util.BaseUtils;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +32,10 @@ public class ReviewController extends BaseController<Review> {
      * @param review review对象
      * @return 结果
      */
-    @PostMapping("/api/reviews/{target}/{id}")
-    public JsonResult addReview(@PathVariable String target, @PathVariable Integer id, Review review) {
+    @PostMapping("/api/reviews/{target}/{targetId}")
+    public JsonResult addReview(@PathVariable String target, @PathVariable Integer targetId, Review review) {
         review.setTarget(target);
-        review.setTargetId(id);
+        review.setTargetId(targetId);
         if (BaseUtils.isNullOrEmpty(review.getContent())) {
             return JsonResult.error("内容不能为空");
         }

@@ -44,7 +44,7 @@
     delete from sys_course
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.giit.platform.entity.Course" >
+  <insert id="insert" parameterType="cn.giit.platform.entity.Course" useGeneratedKeys="true" keyProperty="id">
     insert into sys_course (id, header, title, 
       description, content, category_id, 
       category, create_time, create_user, 
@@ -62,7 +62,7 @@
       #{str1,jdbcType=VARCHAR}, #{str2,jdbcType=VARCHAR}, #{str3,jdbcType=VARCHAR}, #{str4,jdbcType=VARCHAR}, 
       #{str5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.giit.platform.entity.Course" >
+  <insert id="insertSelective" parameterType="cn.giit.platform.entity.Course" useGeneratedKeys="true" keyProperty="id">
     insert into sys_course
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
