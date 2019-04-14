@@ -32,7 +32,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         User user = getCurrentUser();
         if (!BaseUtils.isNullOrEmpty(user)) {
             item.setCreateUserId(user.getId());
-            item.setCreateUser(user.getUsername());
+            item.setCreateUser(user.getNickname());
         }
         item.setCreateTime(new Date(System.currentTimeMillis()));
         if (getMapper().insertSelective(item) == 0) {
@@ -51,7 +51,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         for (T item : items) {
             if (!BaseUtils.isNullOrEmpty(user)) {
                 item.setCreateUserId(user.getId());
-                item.setCreateUser(user.getUsername());
+                item.setCreateUser(user.getNickname());
             }
             item.setCreateTime(new Date(System.currentTimeMillis()));
             if (getMapper().insertSelective(item) == 0) {
@@ -75,7 +75,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         User user = getCurrentUser();
         if (!BaseUtils.isNullOrEmpty(user)) {
             item.setDeleteUserId(user.getId());
-            item.setDeleteUser(user.getUsername());
+            item.setDeleteUser(user.getNickname());
         }
         item.setDeleteTime(new Date(System.currentTimeMillis()));
         if (getMapper().deleteByPrimaryKey(id) == 0) {
@@ -95,7 +95,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
             T item = getMapper().selectByPrimaryKey(id);
             if (!BaseUtils.isNullOrEmpty(user)) {
                 item.setDeleteUserId(user.getId());
-                item.setDeleteUser(user.getUsername());
+                item.setDeleteUser(user.getNickname());
             }
             item.setDeleteTime(new Date(System.currentTimeMillis()));
             if (BaseUtils.isNullOrEmpty(item)) {
@@ -122,7 +122,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         for (T item : results) {
             if (!BaseUtils.isNullOrEmpty(user)) {
                 item.setDeleteUserId(user.getId());
-                item.setDeleteUser(user.getUsername());
+                item.setDeleteUser(user.getNickname());
             }
             item.setDeleteTime(new Date(System.currentTimeMillis()));
         }
@@ -143,7 +143,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         User user = getCurrentUser();
         if (!BaseUtils.isNullOrEmpty(user)) {
             item.setUpdateUserId(user.getId());
-            item.setUpdateUser(user.getUsername());
+            item.setUpdateUser(user.getNickname());
         }
         item.setUpdateTime(new Date(System.currentTimeMillis()));
         if (getMapper().updateByPrimaryKeySelective(item) == 0) {
@@ -166,7 +166,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
             }
             if (!BaseUtils.isNullOrEmpty(user)) {
                 item.setUpdateUserId(user.getId());
-                item.setUpdateUser(user.getUsername());
+                item.setUpdateUser(user.getNickname());
             }
             item.setUpdateTime(new Date(System.currentTimeMillis()));
             if (getMapper().updateByPrimaryKeySelective(item) == 0) {
@@ -182,7 +182,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     public T upgradeItemByPrimaryKey(T item) {
         User user = getCurrentUser();
         if (!BaseUtils.isNullOrEmpty(user)) {
-            item.setUpdateUser(user.getUsername());
+            item.setUpdateUser(user.getNickname());
             item.setUpdateUserId(user.getId());
         }
         item.setUpdateTime(new Date(System.currentTimeMillis()));
@@ -208,7 +208,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         for (T item : oldList) {
             if (!BaseUtils.isNullOrEmpty(user)) {
                 item.setUpdateUserId(user.getId());
-                item.setUpdateUser(user.getUsername());
+                item.setUpdateUser(user.getNickname());
             }
             item.setUpdateTime(new Date(System.currentTimeMillis()));
         }
@@ -288,6 +288,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
             conditionMap = new HashMap<>();
         }
         if (pageNum != 0 && pageSize != 0) {
+            log.info("pageNum:" + pageNum + ", pageSize: " + pageSize);
             PageHelper.startPage(pageNum, pageSize);
         }
         if (!BaseUtils.isNullOrEmpty(orderBy)) {

@@ -29,7 +29,7 @@ public class UserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        String token = request.getHeader(AppConst.KEY_SESSION_KEY);
+        String token = request.getHeader(AppConst.KEY_AUTHORIZATION);
         if (BaseUtils.isNullOrEmpty(token)) {
             response.sendRedirect("/401");
             return false;
